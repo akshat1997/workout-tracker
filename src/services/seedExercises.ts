@@ -1,0 +1,28 @@
+export const seedExercises: { name: string; muscleGroup?: string }[] = [
+  { name: 'Barbell Bench Press', muscleGroup: 'Chest' },
+  { name: 'Incline Dumbbell Press', muscleGroup: 'Chest' },
+  { name: 'Dumbbell Fly', muscleGroup: 'Chest' },
+  { name: 'Push-Up', muscleGroup: 'Chest' },
+  { name: 'Barbell Squat', muscleGroup: 'Legs' },
+  { name: 'Romanian Deadlift', muscleGroup: 'Hamstrings' },
+  { name: 'Leg Press', muscleGroup: 'Legs' },
+  { name: 'Walking Lunge', muscleGroup: 'Legs' },
+  { name: 'Conventional Deadlift', muscleGroup: 'Back' },
+  { name: 'Barbell Row', muscleGroup: 'Back' },
+  { name: 'Lat Pulldown', muscleGroup: 'Back' },
+  { name: 'Pull-Up', muscleGroup: 'Back' },
+  { name: 'Overhead Press', muscleGroup: 'Shoulders' },
+  { name: 'Dumbbell Shoulder Press', muscleGroup: 'Shoulders' },
+  { name: 'Lateral Raise', muscleGroup: 'Shoulders' },
+  { name: 'Face Pull', muscleGroup: 'Rear Delts' },
+  { name: 'Barbell Biceps Curl', muscleGroup: 'Biceps' },
+  { name: 'Dumbbell Hammer Curl', muscleGroup: 'Biceps' },
+  { name: 'Triceps Pushdown', muscleGroup: 'Triceps' },
+  { name: 'Skullcrusher', muscleGroup: 'Triceps' },
+  { name: 'Cable Crunch', muscleGroup: 'Abs' },
+  { name: 'Hanging Leg Raise', muscleGroup: 'Abs' },
+  { name: 'Hip Thrust', muscleGroup: 'Glutes' },
+  { name: 'Calf Raise', muscleGroup: 'Calves' },
+];
+
+
