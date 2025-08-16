@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRoutines, useSessions, useExercises } from '../hooks/useWorkoutData';
-import type { WorkoutRoutine, WorkoutSession, ExerciseInWorkout, WorkoutSet } from '../types';
-import { generateId, getCurrentDayOfWeek, convertWeight } from '../utils';
+import type { WorkoutRoutine, WorkoutSession, WorkoutSet } from '../types';
+import { generateId, convertWeight } from '../utils';
 import { RestTimer } from './RestTimer';
 import { db } from '../db';
 
