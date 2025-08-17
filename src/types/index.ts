@@ -11,6 +11,7 @@ export interface WorkoutSet {
   unit: 'kg' | 'lb';
   completed: boolean;
   restTime?: number;
+  completedAt?: Date;
 }
 
 export interface ExerciseInWorkout {
@@ -47,5 +48,6 @@ export interface ProgressRecord {
     reps: number;
     weight: number;
     unit: 'kg' | 'lb';
+    completedAt?: Date;
   }[];
 }

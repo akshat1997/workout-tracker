@@ -305,12 +305,15 @@ export const RoutineBuilder: React.FC = () => {
                         <div key={set.id} className="flex items-center gap-2">
                           <span className="text-gray-400 text-sm w-12">Set {setIndex + 1}</span>
                           <input
-                            type="number"
-                            value={set.reps}
-                            onChange={(e) => updateSet(exerciseInWorkout.id, set.id, { reps: parseInt(e.target.value) || 0 })}
+                            type="text"
+                            inputMode="numeric"
+                            value={String(set.reps)}
+                            onChange={(e) => {
+                              const v = e.target.value.replace(/[^0-9]/g,'');
+                              updateSet(exerciseInWorkout.id, set.id, { reps: v === '' ? 0 : parseInt(v) });
+                            }}
                             className="w-20 px-2 py-1 bg-gray-600 text-white rounded text-center focus:outline-none focus:ring-2 focus:ring-blue-500"
                             placeholder="Reps"
-                            min="0"
                           />
                           <span className="text-gray-400">×</span>
                           <input

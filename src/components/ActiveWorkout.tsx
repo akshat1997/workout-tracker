@@ -13,6 +13,7 @@ export const ActiveWorkout: React.FC = () => {
   const [selectedRoutine, setSelectedRoutine] = useState<WorkoutRoutine | null>(null);
   const [activeSession, setActiveSession] = useState<WorkoutSession | null>(null);
   const [showRestTimer, setShowRestTimer] = useState(false);
+  const [restDuration, setRestDuration] = useState(120);
   const [unit, setUnit] = useState<'kg' | 'lb'>('lb');
   const [weightEdits, setWeightEdits] = useState<Record<string, string>>({});
 
@@ -84,9 +85,10 @@ export const ActiveWorkout: React.FC = () => {
               if (set.id === setId) {
                 const isCompleting = !set.completed;
                 if (isCompleting) {
+                  setRestDuration(120);
                   setShowRestTimer(true);
                 }
-                return { ...set, completed: !set.completed };
+                return { ...set, completed: !set.completed, completedAt: isCompleting ? new Date() : set.completedAt };
               }
               return set;
             })
@@ -98,6 +100,7 @@ export const ActiveWorkout: React.FC = () => {
 
     setActiveSession(updatedSession);
     await updateSession(updatedSession);
+    onLastSetCompleted();
   };
 
   const updateSetValue = async (exerciseId: string, setId: string, field: 'reps' | 'weight', value: number) => {
@@ -144,6 +147,20 @@ export const ActiveWorkout: React.FC = () => {
     };
     setActiveSession(updatedSession);
     await updateSession(updatedSession);
+  };
+
+  const onLastSetCompleted = () => {
+    if (!activeSession) return;
+    const allSets = activeSession.exercises.flatMap(e => e.sets);
+    const allCompleted = allSets.every(s => s.completed);
+    if (allCompleted) {
+      if (confirm('All sets done. End workout?')) {
+        finishWorkout();
+      } else {
+        setRestDuration(150);
+        setShowRestTimer(true);
+      }
+    }
   };
 
   const removeSetDuringWorkout = async (exerciseId: string, setId: string) => {
@@ -314,7 +331,12 @@ export const ActiveWorkout: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <RestTimer onComplete={() => setShowRestTimer(false)} />
+            <RestTimer defaultDuration={restDuration} onComplete={() => setShowRestTimer(false)} />
+            <div className="mt-3 grid grid-cols-4 gap-2">
+              {[30,60,90,120].map(d => (
+                <button key={d} onClick={() => setRestDuration(d)} className={`px-2 py-1 rounded ${restDuration===d?'bg-blue-500':'bg-gray-700'}`}>{d}s</button>
+              ))}
+            </div>
           </div>
         </div>
       )}
